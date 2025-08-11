@@ -36,6 +36,8 @@ const Shop = () => {
         setshowBtn(!showBtn);
     }
 
+    
+
 
   return (
     <div>   
@@ -66,7 +68,7 @@ const Shop = () => {
             </div>
             <div className="inputs">
                 <label htmlFor="desc">Description</label>
-                <input type="text" name='desc' value={product.desc} onChange={handleChange} required/>
+                <textarea name='desc' value={product.desc} onChange={handleChange} required></textarea>
             </div>
             <div className="inputs">
                 <label htmlFor="preview">Preview</label>
@@ -88,14 +90,16 @@ const Shop = () => {
                     // <h3>Your Products</h3>Headph
                     return( 
                             <div className="product" key={index}>
-                                <img className='productImg' src={prod.image} alt="productImg" />
+                                <div className='img-container'>
+                                    <img className='productImg' src={prod.image} alt="productImg" />
+                                </div>
                                 <p className='productTitle'>{prod.title}</p>
                                 <div className='side'>
                                     <p>N{prod.price}</p>
                                     <button>Add to Cart</button>
                                 </div>
                                 <div className='productDesc'>
-                                    {prod.desc}
+                                    <p>{prod.desc}</p>
                                 </div>
                             </div>
                     )
