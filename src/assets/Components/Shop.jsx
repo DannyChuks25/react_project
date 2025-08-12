@@ -11,9 +11,16 @@ const Shop = () => {
         price: "",
         desc: "",
     })
+
     const handleChange = (e)=> {
         setProduct({...product, [e.target.name]: e.target.value})
     }
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const imageURL = URL.createObjectURL(file); // Preview the uploaded image
+        setProduct({...product, image: imageURL});
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setallProducts([...allProducts, product]);
@@ -24,32 +31,32 @@ const Shop = () => {
             desc: "",
         })
         console.log(allProducts)
+        setShowForm(false);
+        setshowBtn(!showBtn);
     }
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        const imageURL = URL.createObjectURL(file); // Preview the uploaded image
-        setProduct({...product, image: imageURL});
-    };
+    
     const toggleBtn = () => setShowForm(!showForm)
     const handleAddProduct = () => {
         toggleBtn();
         setshowBtn(!showBtn);
     }
+   
 
     
 
 
   return (
     <div>   
+                <button className='addProduct' onClick={handleAddProduct}>
+                    Add Product 
+                </button>
             {
-                showBtn && 
+                allProducts.length === 0 && 
                 <div className='cart'>
                     <div className='empty'>
                         <h1>Oops! Your Shopping Cart is Empty</h1>
                     </div>
-                    <button className='addProduct' onClick={handleAddProduct}>
-                        Add Product
-                    </button>
+                    
                 </div>
             }
 
@@ -64,7 +71,7 @@ const Shop = () => {
             </div>
             <div className="inputs">
                 <label htmlFor="price">Product Price</label>
-                <input type="text" name='price' value={product.price} onChange={handleChange} required/>
+                <input type="number" name='price' value={product.price} onChange={handleChange} required/>
             </div>
             <div className="inputs">
                 <label htmlFor="desc">Description</label>
